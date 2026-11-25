@@ -7,7 +7,7 @@
   <meta http-equiv="Cache-Control" content="no-store">
   <title>时衡 · 交互原型</title>
   <link rel="icon" href="assets/app-icon-main.png" type="image/png">
-  <link rel="stylesheet" href="styles.css?v=readonly-1">
+  <link rel="stylesheet" href="styles.css?v=readonly-2">
 </head>
 <body class="public-read-only">
   <div class="studio">
@@ -41,17 +41,6 @@
             <span class="version-pill">Prototype 03</span>
           </div>
           <p>围绕作息、睡眠与精力的一体化记录体验</p>
-        </div>
-        <div class="workspace-actions">
-          <button class="studio-btn studio-btn--quiet" id="resetBtn" type="button">重置</button>
-          <button class="studio-btn" id="editBtn" type="button">
-            <span class="icon" data-icon="sliders"></span>
-            <span>编辑模式</span>
-          </button>
-          <button class="studio-btn studio-btn--dark" id="exportBtn" type="button">
-            <span class="icon" data-icon="download"></span>
-            <span>导出修改</span>
-          </button>
         </div>
       </header>
 
@@ -766,22 +755,9 @@
       </section>
     </main>
 
-    <aside class="inspector" aria-label="编辑属性面板">
-      <div class="inspector-head">
-        <div>
-          <span>Property panel</span>
-          <h2>编辑面板</h2>
-        </div>
-        <span class="edit-status" id="editStatus">预览</span>
-      </div>
-      <div class="inspector-body" id="inspectorBody"></div>
-      <div class="inspector-foot">
-        <p>修改会自动保存在当前浏览器。导出按钮可下载完整 HTML 原型。</p>
-      </div>
-    </aside>
   </div>
 
   <div class="save-toast" id="saveToast">修改已保存</div>
-  <script src="app.js?v=readonly-1"></script>
+  <script src="app.js?v=readonly-2"></script>
 </body>
 </html>

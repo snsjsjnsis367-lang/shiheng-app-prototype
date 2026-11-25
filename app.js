@@ -629,6 +629,7 @@
   }
 
   function renderInspector() {
+    if (READ_ONLY || !inspectorBody) return;
     if (!editing) {
       renderPreviewInspector();
       return;
@@ -843,7 +844,7 @@
     if (editing) persistSoon();
   });
 
-  editBtn.addEventListener("click", () => {
+  editBtn?.addEventListener("click", () => {
     if (!READ_ONLY) setEditing(!editing);
   });
 
