@@ -4011,6 +4011,27 @@ textarea:focus-visible,
   }
 }
 
+body.public-read-only .workspace-actions,
+body.public-read-only .inspector {
+  display: none !important;
+}
+
+body.public-read-only .studio {
+  grid-template-columns: 228px minmax(560px, 1fr);
+}
+
+@media (max-width: 1180px) {
+  body.public-read-only .studio {
+    grid-template-columns: 208px minmax(500px, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  body.public-read-only .studio {
+    display: block;
+  }
+}
+
 @media (max-height: 820px) and (min-width: 761px) {
   .device-shell {
     height: 760px;

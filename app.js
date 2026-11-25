@@ -1,6 +1,7 @@
 (() => {
   "use strict";
 
+  const READ_ONLY = document.body.classList.contains("public-read-only");
   const STORAGE_KEY = "shiheng-editable-prototype-v2";
   const screensRoot = document.getElementById("screens");
   const screenList = document.getElementById("screenList");
@@ -201,6 +202,7 @@
   }
 
   function persist() {
+    if (READ_ONLY) return;
     const state = {
       screens: screensRoot.innerHTML,
       current: currentScreen,
@@ -215,6 +217,7 @@
   }
 
   function persistSoon() {
+    if (READ_ONLY) return;
     window.clearTimeout(saveTimer);
     saveTimer = window.setTimeout(() => {
       persist();
@@ -223,6 +226,7 @@
   }
 
   function restoreState() {
+    if (READ_ONLY) return false;
     let state = window.__SHIHENG_EXPORT__ || null;
     if (!state) {
       try {
@@ -272,10 +276,13 @@
   }
 
   function setEditing(next) {
+    if (READ_ONLY) next = false;
     editing = next;
     document.body.classList.toggle("is-editing", editing);
-    editStatus.textContent = editing ? "编辑中" : "预览";
-    editBtn.querySelector("span:last-child").textContent = editing ? "退出编辑" : "编辑模式";
+    if (!READ_ONLY) {
+      editStatus.textContent = editing ? "编辑中" : "预览";
+      editBtn.querySelector("span:last-child").textContent = editing ? "退出编辑" : "编辑模式";
+    }
     if (editing) {
       makeTextEditable(screensRoot);
     } else {
@@ -836,7 +843,9 @@
     if (editing) persistSoon();
   });
 
-  editBtn.addEventListener("click", () => setEditing(!editing));
+  editBtn.addEventListener("click", () => {
+    if (!READ_ONLY) setEditing(!editing);
+  });
 
   function resetPrototype() {
     const confirmed = window.confirm("恢复初始原型会清除当前浏览器中的文字与布局修改，是否继续？");
@@ -845,9 +854,9 @@
     window.location.reload();
   }
 
-  resetBtn.addEventListener("click", resetPrototype);
+  if (!READ_ONLY) resetBtn.addEventListener("click", resetPrototype);
 
-  exportBtn.addEventListener("click", () => {
+  if (!READ_ONLY) exportBtn.addEventListener("click", () => {
     persist();
     const clone = document.documentElement.cloneNode(true);
     clone.querySelectorAll(".is-selected").forEach((node) => node.classList.remove("is-selected"));
